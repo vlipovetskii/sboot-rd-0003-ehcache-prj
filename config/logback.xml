@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+	<property name="FILE_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n" />
+	<property name="FILE_LOG_PATH" value="logs/sboot-rd-0003-ehcache.log" />
+	
+	<appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+		  <charset>UTF-8</charset>
+		  <pattern>${FILE_LOG_PATTERN}</pattern>
+		</encoder>
+	</appender>
+  
+ 	<appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+ 		<file>${FILE_LOG_PATH}</file>
+    	<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">    	
+      		<!-- mm: minutely rollover -->
+      		<!--<fileNamePattern>${LOG_FILE}.%d{yyyy-MM-dd-HH-mm}.zip</fileNamePattern> -->
+      		<!-- mm: dayly rollover -->
+      		<fileNamePattern>${FILE_LOG_PATH}.%d{yyyy-MM-dd}.zip</fileNamePattern>
+      		<maxHistory>30</maxHistory>
+    	</rollingPolicy>
+
+        <encoder>
+			<charset>UTF-8</charset>
+            <pattern>${FILE_LOG_PATTERN}</pattern>
+        </encoder>
+
+    </appender>
+
+	<root level="${ROOT_LOG_LEVEL}" additivity="false">
+		<appender-ref ref="CONSOLE" />
+		<appender-ref ref="FILE" />
+	</root>
+</configuration>
